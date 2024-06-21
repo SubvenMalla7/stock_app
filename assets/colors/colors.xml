@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primaryColor">#FF5528</color>
+    <color name="blueColor">#003D86</color>
+    <color name="labelColor">#7A7A7A</color>
+    <color name="blackTextColor">#333333</color>
+    <color name="greybgColor">#F0F0F0</color>
+    <color name="formGreyColor">#F1F1F1</color>
+    <color name="textGreyColor">#959595</color>
+    <color name="yellowColor">#F2CB44</color>
+    <color name="redColor">#F46666</color>
+    <color name="redLightColor">#0CF46565</color>
+    <color name="accentYellow">#FFF3CB</color>
+    <color name="blueColor">#50BDEC</color>
+    <color name="greenColor">#3BDE86</color>
+    <color name="greyHandleColor">#D0D0D0</color>
+    <color name="orangeColor">#FA9334</color>
+    <color name="pinkColor">#F466DE</color>
+</resources>
