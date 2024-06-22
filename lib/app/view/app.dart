@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+import 'package:stock_app/core/service/dependency_injector.dart';
+import 'package:stock_app/feature/dashboard/presentation/cubit/market_cubit.dart';
 
 import 'package:stock_app/feature/dashboard/presentation/screen/dashboard_screen.dart';
 
@@ -16,18 +20,23 @@ class App extends StatelessWidget {
     return ScreenUtilInit(
       designSize: const Size(390, 844),
       builder: (context, snap) {
-        return MaterialApp(
-          navigatorKey: navigatorKey,
-          theme: ThemeData(
-            appBarTheme: AppBarTheme(
-              backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        return MultiProvider(
+          providers: [
+            BlocProvider(create: (context) => MarketCubit(marketUsecase: di())),
+          ],
+          child: MaterialApp(
+            navigatorKey: navigatorKey,
+            theme: ThemeData(
+              appBarTheme: AppBarTheme(
+                backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+              ),
+              useMaterial3: true,
             ),
-            useMaterial3: true,
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
+            home: const DashboardScreen(),
+            onGenerateRoute: AppRouter.onGenerateRoute,
           ),
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-          supportedLocales: AppLocalizations.supportedLocales,
-          home: const DashboardScreen(),
-          onGenerateRoute: AppRouter.onGenerateRoute,
         );
       },
     );

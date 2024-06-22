@@ -183,7 +183,7 @@ class RequestClient {
       bool isInternet = await CheckInternetConnection().hasInternet();
 
       if (isInternet) {
-        response = await _client.get(endPoint,
+        response = await _client.get(Request.createUrl(endPoint),
             options: Options(
               headers: Request.createHeader(),
               contentType: Headers.jsonContentType,

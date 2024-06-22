@@ -17,7 +17,7 @@ class MarketUsecase {
   List<StockEntity> monthDataList = [];
   List<StockEntity> yearlyDataList = [];
 
-  EitherResponse getHubs() async {
+  EitherResponse fetchMarketdata() async {
     return await repository.fetchMarketdata().then((value) {
       value.fold((l) => null, (r) {
         MarketContainer dataContainer = r.data;

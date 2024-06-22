@@ -2,7 +2,9 @@ import 'dart:math';
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stock_app/core/helper/log_helper.dart';
+import 'package:stock_app/feature/dashboard/presentation/cubit/market_cubit.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -23,7 +25,7 @@ class LineChartSample2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    printLog("Daily, ${generateStockData('hourly')}");
+    context.read<MarketCubit>().fetchMarketData();
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: SizedBox(
