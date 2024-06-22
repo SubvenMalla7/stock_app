@@ -1,3 +1,4 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:stock_app/core/helper/app_type_def.dart';
 
 import 'package:stock_app/feature/dashboard/domain/entities/market_entity_container/market_entity_container.dart';
@@ -39,6 +40,16 @@ class MarketUsecase {
       });
       return value;
     });
+  }
+
+  List<FlSpot> convertData(List<StockEntity> sourceDataList) {
+    List<FlSpot> dataList = [];
+
+    for (var i = 0; i < sourceDataList.length; i++) {
+      dataList.add(FlSpot(i.toDouble(), sourceDataList[i].index));
+    }
+
+    return dataList;
   }
 
   clearData() {
