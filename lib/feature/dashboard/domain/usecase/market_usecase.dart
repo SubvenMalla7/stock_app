@@ -62,8 +62,12 @@ class MarketUsecase {
     for (var i = 0; i < sourceDataList.length; i++) {
       dataList.add(FlSpot(i.toDouble(), sourceDataList[i].index));
     }
-    maxYValue = dataList.map((spot) => spot.y).reduce((a, b) => a > b ? a : b);
-    minYValue = dataList.map((spot) => spot.y).reduce((a, b) => a < b ? a : b);
+    if (dataList.isNotEmpty) {
+      maxYValue =
+          dataList.map((spot) => spot.y).reduce((a, b) => a > b ? a : b);
+      minYValue =
+          dataList.map((spot) => spot.y).reduce((a, b) => a < b ? a : b);
+    }
     return dataList;
   }
 

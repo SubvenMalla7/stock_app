@@ -40,7 +40,11 @@ class MarketGraphWidget extends StatelessWidget {
         drawVerticalLine: false,
         horizontalInterval: 5,
         checkToShowHorizontalLine: (value) {
-          return value == dataPoints.first.y.floor();
+          if (dataPoints.isNotEmpty) {
+            return value == dataPoints.first.y.floor();
+          } else {
+            return false;
+          }
         },
       ),
       titlesData: FlTitlesData(

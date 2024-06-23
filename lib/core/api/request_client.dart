@@ -6,8 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stock_app/app/view/app.dart';
 import 'package:stock_app/core/api/request.dart';
+import 'package:stock_app/core/constants/string_constants.dart';
 import 'package:stock_app/core/domain/entity/error/error_entity.dart';
-import 'package:stock_app/core/helper/log_helper.dart';
+
 import 'package:stock_app/core/service/internet_connection.dart';
 import 'package:stock_app/core/widget/text_widgets.dart';
 import 'package:stock_app/gen/colors.gen.dart';
@@ -266,11 +267,14 @@ class RequestClient {
             title: data.errors.first.title, message: data.errors.first.detail);
 
       case 508:
-        printLog('No Internet Connection');
+        showErrorPopup(navigatorKey.currentContext!,
+            title: StringConstants.noInternet,
+            message: StringConstants.noInternetDes);
 
       case 502 || 500 || 503:
         showErrorPopup(navigatorKey.currentContext!,
-            title: "Error", message: "Internal Server Error");
+            title: StringConstants.error,
+            message: StringConstants.internalServerError);
 
       default:
         break;
