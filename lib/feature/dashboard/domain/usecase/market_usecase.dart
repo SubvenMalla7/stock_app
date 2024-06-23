@@ -97,9 +97,7 @@ class MarketUsecase {
   }
 
   String getToolTipDate(String value) {
-    print(value);
     DateFormat dateFormat = DateFormat('MMMM dd, yyyy');
-
     String dateString = currentDataList
         .firstWhere((element) => element.index.toString() == value)
         .date;
