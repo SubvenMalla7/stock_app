@@ -39,8 +39,9 @@ class CreateRightDetailWidget extends StatelessWidget {
             Container(
               margin: const EdgeInsets.only(bottom: 2),
               padding: const EdgeInsets.all(4),
-              decoration:
-                  BoxDecoration(shape: BoxShape.circle, color: Colors.green),
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: useCase.isMarketOpen ? Colors.green : Colors.red),
             ),
             4.horizontalSpace,
             BuildText(
