@@ -21,7 +21,6 @@ class DashboardScreen extends StatefulWidget {
 class _DashboardScreenState extends State<DashboardScreen> {
   @override
   void initState() {
-    context.read<MarketCubit>().fetchMarketData();
     Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
       if ((result == ConnectivityResult.mobile) ||
           result == ConnectivityResult.wifi) {
