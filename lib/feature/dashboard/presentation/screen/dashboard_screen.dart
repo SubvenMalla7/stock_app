@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:stock_app/core/api/enum.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,6 +24,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   void initState() {
     context.read<MarketCubit>().fetchMarketData();
+    Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
+      if ((result == ConnectivityResult.mobile) ||
+          result == ConnectivityResult.wifi) {
+        context.read<MarketCubit>().fetchMarketData();
+      }
+    });
     super.initState();
   }
 
