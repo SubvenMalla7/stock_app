@@ -20,8 +20,15 @@ class $AssetsSvgGen {
   /// File path: assets/svg/eye.svg
   SvgGenImage get eye => const SvgGenImage('assets/svg/eye.svg');
 
+  /// File path: assets/svg/trend_down.svg
+  SvgGenImage get trendDown => const SvgGenImage('assets/svg/trend_down.svg');
+
+  /// File path: assets/svg/trend_upward.svg
+  SvgGenImage get trendUpward =>
+      const SvgGenImage('assets/svg/trend_upward.svg');
+
   /// List of all assets
-  List<SvgGenImage> get values => [eyeSlash, eye];
+  List<SvgGenImage> get values => [eyeSlash, eye, trendDown, trendUpward];
 }
 
 class Assets {

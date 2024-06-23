@@ -50,16 +50,6 @@ EitherResponse handleNetworkCall(request, [dynamic fromJsonModel]) async {
       return Left(DataResponse.error("Internal Server Error."));
     }
   } else {
-    // final dynamic object = response!.data;
-    // var data;
-    // try {
-    //   data = ErrorEntity.fromJson(object as Map<String, dynamic>);
-    // } catch (e) {
-    //   printLog(
-    //       "*** Error parsing response data in error entity: response.dart file \n ${e.toString()}");
-    //   data = const ErrorEntity(
-    //       errors: [ErrorData(title: "500", detail: "Something went wrong")]);
-    // }
     return Left(DataResponse.error(''));
   }
 }

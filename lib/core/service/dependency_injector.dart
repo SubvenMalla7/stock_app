@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:stock_app/core/api/request_client.dart';
 import 'package:stock_app/feature/dashboard/data/repository_impl/market_repository_impl.dart';
 import 'package:stock_app/feature/dashboard/domain/repository_interface/market_interface_repository.dart';
 import 'package:stock_app/feature/dashboard/domain/usecase/market_usecase.dart';
@@ -15,4 +16,5 @@ Future<void> setupLocator() async {
   // Data sources
   //Market UsesCase
   di.registerLazySingleton(() => MarketUsecase(repository: di()));
+  di.registerSingleton(RequestClient());
 }
