@@ -1,4 +1,3 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stock_app/core/helper/import_helper.dart';
 import 'package:stock_app/feature/dashboard/presentation/cubit/market_cubit.dart';
 
@@ -60,7 +59,9 @@ class CreateRightDetailWidget extends StatelessWidget {
         ),
         8.verticalSpace,
         BuildText(
-          text: 'Closes in ${useCase.timeLeftBeforeMarketClose}',
+          text: useCase.isMarketOpen
+              ? 'Closes in ${useCase.timeLeftBeforeMarketClose}'
+              : "Closed",
           fontSize: 12.sp,
           fontWeight: FontWeight.w700,
         ),

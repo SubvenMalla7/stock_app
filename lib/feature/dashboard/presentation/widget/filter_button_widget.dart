@@ -1,5 +1,3 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:stock_app/feature/dashboard/presentation/cubit/market_cubit.dart';
 
 import '../../../../core/helper/import_helper.dart';

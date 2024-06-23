@@ -18,6 +18,7 @@ class MarketUsecase {
   List<StockEntity> dayDataList = [];
   List<StockEntity> monthDataList = [];
   List<StockEntity> yearlyDataList = [];
+  List<StockEntity> currentDataList = [];
 
   //doubles
   double maxYValue = 0.0;
@@ -67,17 +68,19 @@ class MarketUsecase {
   }
 
   List<StockEntity> getSourceDataSource(String selectedFilter) {
+    currentDataList.clear();
     if (selectedFilter == filterList[0]) {
-      return minDataList;
+      currentDataList.addAll(minDataList);
     } else if (selectedFilter == filterList[1]) {
-      return hourDataList;
+      currentDataList.addAll(hourDataList);
     } else if (selectedFilter == filterList[2]) {
-      return dayDataList;
+      currentDataList.addAll(dayDataList);
     } else if (selectedFilter == filterList[3]) {
-      return monthDataList;
+      currentDataList.addAll(monthDataList);
     } else {
-      return yearlyDataList;
+      currentDataList.addAll(yearlyDataList);
     }
+    return currentDataList;
   }
 
   bool isNegative(double value) {
@@ -87,6 +90,17 @@ class MarketUsecase {
   String getFormattedDate(DateTime dateTime) {
     DateFormat dateFormat = DateFormat('MMMM dd, yyyy h:mm a');
     return dateFormat.format(dateTime);
+  }
+
+  String getToolTipDate(String value) {
+    print(value);
+    DateFormat dateFormat = DateFormat('MMMM dd, yyyy');
+
+    String dateString = currentDataList
+        .firstWhere((element) => element.index.toString() == value)
+        .date;
+
+    return "${dateFormat.format(DateTime.parse(dateString))},\n$value";
   }
 
   checkMarketStatus() {
