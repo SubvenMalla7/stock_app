@@ -1,4 +1,6 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stock_app/core/helper/import_helper.dart';
+import 'package:stock_app/feature/dashboard/presentation/cubit/market_cubit.dart';
 
 class CreateRightDetailWidget extends StatelessWidget {
   const CreateRightDetailWidget({
@@ -7,6 +9,7 @@ class CreateRightDetailWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final useCase = context.read<MarketCubit>().marketUsecase;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
@@ -47,16 +50,16 @@ class CreateRightDetailWidget extends StatelessWidget {
             ),
             4.horizontalSpace,
             BuildText(
-              text: "OPEN",
+              text: useCase.isMarketOpen ? "OPEN" : "CLOSE",
               fontSize: 14.sp,
-              color: Colors.green,
+              color: useCase.isMarketOpen ? Colors.green : Colors.red,
               fontWeight: FontWeight.w700,
             ),
           ],
         ),
         8.verticalSpace,
         BuildText(
-          text: 'Closes in 3 hrs 29 min',
+          text: 'Closes in ${useCase.timeLeftBeforeMarketClose}',
           fontSize: 12.sp,
           fontWeight: FontWeight.w700,
         ),

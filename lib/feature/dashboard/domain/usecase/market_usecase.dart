@@ -1,4 +1,5 @@
 import 'package:fl_chart/fl_chart.dart';
+import 'package:intl/intl.dart';
 import 'package:stock_app/core/constants/list_constant.dart';
 import 'package:stock_app/core/helper/app_type_def.dart';
 
@@ -18,8 +19,15 @@ class MarketUsecase {
   List<StockEntity> monthDataList = [];
   List<StockEntity> yearlyDataList = [];
 
+  //doubles
   double maxYValue = 0.0;
   double minYValue = 0.0;
+
+  //bool
+  bool isMarketOpen = false;
+
+  //String
+  String timeLeftBeforeMarketClose = '';
 
   EitherResponse fetchMarketdata() async {
     return await repository.fetchMarketdata().then((value) {
@@ -70,6 +78,49 @@ class MarketUsecase {
     } else {
       return yearlyDataList;
     }
+  }
+
+  bool isNegative(double value) {
+    return value < 0;
+  }
+
+  String getFormattedDate(DateTime dateTime) {
+    DateFormat dateFormat = DateFormat('MMMM dd, yyyy h:mm a');
+    return dateFormat.format(dateTime);
+  }
+
+  checkMarketStatus() {
+    // Get the current date and time
+    DateTime now = DateTime.now();
+    isMarketOpen = false;
+    // Define market opening and closing times
+    DateTime marketOpenTime = DateTime(now.year, now.month, now.day, 11, 0);
+    DateTime marketCloseTime = DateTime(now.year, now.month, now.day, 15, 0);
+
+    // Check if today is a market day (Sunday to Thursday)
+    // Check if today is a market day (Sunday to Thursday)
+    bool isMarketDay = now.weekday == DateTime.sunday ||
+        now.weekday == DateTime.monday ||
+        now.weekday == DateTime.tuesday ||
+        now.weekday == DateTime.wednesday ||
+        now.weekday == DateTime.thursday;
+
+    if (isMarketDay) {
+      if (now.isAfter(marketOpenTime) && now.isBefore(marketCloseTime)) {
+        isMarketOpen = true;
+
+        // Market is open, calculate time left until it closes
+        Duration timeLeft = marketCloseTime.difference(now);
+
+        timeLeftBeforeMarketClose = formatDuration(timeLeft);
+      }
+    }
+  }
+
+  String formatDuration(Duration duration) {
+    int hours = duration.inHours;
+    int minutes = duration.inMinutes.remainder(60);
+    return '${hours} hrs ${minutes} min';
   }
 
   clearData() {

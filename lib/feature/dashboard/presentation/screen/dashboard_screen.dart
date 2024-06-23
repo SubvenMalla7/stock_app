@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stock_app/core/api/enum.dart';
 import 'package:stock_app/core/constants/list_constant.dart';
 import 'package:stock_app/core/widget/text_widgets.dart';
+import 'package:stock_app/feature/dashboard/domain/entities/market_enity/market_summary_entity.dart';
 
 import 'package:stock_app/feature/dashboard/presentation/cubit/market_cubit.dart';
 import 'package:stock_app/feature/dashboard/presentation/widget/dashboard_row_left_widget.dart';
@@ -38,7 +39,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 ? Center(
                     child: CircularProgressIndicator(),
                   )
-                : CreateBody();
+                : CreateBody(
+                    marketSummaryEntity:
+                        state.status == ApiRequestStates.success
+                            ? state.marketData?.data?.market_sumary
+                            : null,
+                  );
           },
         ));
   }
@@ -47,8 +53,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
 class CreateBody extends StatelessWidget {
   const CreateBody({
     super.key,
+    this.marketSummaryEntity,
   });
-
+  final MarketSummaryEntity? marketSummaryEntity;
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
@@ -64,7 +71,7 @@ class CreateBody extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    CreateLeftDetailWidget(),
+                    CreateLeftDetailWidget(marketData: marketSummaryEntity),
                     CreateRightDetailWidget(),
                   ],
                 ),
