@@ -34,6 +34,21 @@ extension StringExtension on String {
       return this;
     }
   }
+
+  String addCommasToNumber() {
+    final formatter = NumberFormat("#,##,##0.00", "en_US");
+    final number =
+        //  length <= 15
+        //     ?
+        double.tryParse(replaceAll(',', ''));
+    // : BigInt.parse(replaceAll(',', ''));
+
+    if (number != null) {
+      return formatter.format(number);
+    } else {
+      return this;
+    }
+  }
 }
 
 extension EmailMasking on String {

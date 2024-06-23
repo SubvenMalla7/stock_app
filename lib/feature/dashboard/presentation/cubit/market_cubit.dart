@@ -25,6 +25,7 @@ class MarketCubit extends Cubit<MarketState> {
     response.fold(
       (l) => emit(state.copyWith(status: ApiRequestStates.error)),
       (r) {
+        marketUsecase.checkMarketStatus();
         final MarketContainer hubEntityContainer = r.data;
         emit(
           state.copyWith(
