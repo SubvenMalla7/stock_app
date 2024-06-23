@@ -25,27 +25,13 @@ flutter run --flavor dev
 
 flutter clean && flutter pub get
 
-echo "uat debug"
-flutter run --flavor uat
+echo "staging debug"
+flutter run --release --flavor staging --target lib/main_staging.dart
 
-echo "uat release"
-flutter run --flavor uat --release
-
-echo "qa debug"
-flutter run --flavor qa
-
-echo "qa release"
-flutter run --flavor qa --release
-
-echo "live debug"
-flutter run --flavor live
-
-echo "live release"
-flutter run --flavor live --release
+echo "production release"
+flutter run --release --flavor production --target lib/main_production.dart
 
 echo "dev release"
-flutter run --flavor dev --release
-
 flutter run --release --flavor development --target lib/main_development.dart
 
 
