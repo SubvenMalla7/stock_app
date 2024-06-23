@@ -40,8 +40,6 @@ class MarketGraphWidget extends StatelessWidget {
         drawVerticalLine: false,
         horizontalInterval: 5,
         checkToShowHorizontalLine: (value) {
-          print(value);
-          print(dataPoints.first.y.floor());
           return value == dataPoints.first.y.floor();
         },
       ),
@@ -67,6 +65,18 @@ class MarketGraphWidget extends StatelessWidget {
       maxY: usecase.maxYValue + 40,
       minX: 0,
       maxX: dataPoints.length - 1,
+      lineTouchData: LineTouchData(
+        touchTooltipData: LineTouchTooltipData(
+          getTooltipItems: (List<LineBarSpot> lineBarsSpot) {
+            return lineBarsSpot.map((LineBarSpot lineBarSpot) {
+              return LineTooltipItem(
+                '${usecase.getToolTipDate(lineBarSpot.y.toString())}',
+                const TextStyle(color: Colors.white),
+              );
+            }).toList();
+          },
+        ),
+      ),
       lineBarsData: [
         LineChartBarData(
           spots: dataPoints,

@@ -1,4 +1,3 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stock_app/core/extension/string_extensions.dart';
 import 'package:stock_app/core/helper/import_helper.dart';
 import 'package:stock_app/feature/dashboard/domain/entities/market_enity/market_summary_entity.dart';

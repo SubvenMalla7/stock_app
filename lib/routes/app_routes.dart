@@ -7,7 +7,6 @@ class AppRouter {
   static const String dashboardScreen = '/dashboardScreen';
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
-    Object? argument = settings.arguments;
     switch (settings.name) {
       case dashboardScreen:
         return MaterialPageRoute<dynamic>(
